@@ -2,7 +2,7 @@ namespace CleanArchitecture.Domain.Abstractions;
 
 public abstract class Entity
 {
-    private readonly List<IDomainEvents> _domainEvents = new();
+    private readonly List<IDomainEvent> _domainEvents = new();
     protected Entity(Guid id)
     {
         Id = id;
@@ -12,7 +12,7 @@ public abstract class Entity
 
 
 
-    public IReadOnlyList<IDomainEvents> GetDomainEvents()
+    public IReadOnlyList<IDomainEvent> GetDomainEvents()
     {
         return _domainEvents.ToList();
     }
@@ -20,5 +20,10 @@ public abstract class Entity
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();
+    }
+
+    protected void RaiseDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
     }
 }

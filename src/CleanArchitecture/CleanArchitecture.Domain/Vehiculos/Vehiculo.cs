@@ -1,4 +1,3 @@
-using System.Runtime.CompilerServices;
 using CleanArchitecture.Domain.Abstractions;
 
 namespace CleanArchitecture.Domain.Vehiculos;

@@ -35,7 +35,7 @@ public sealed class Vehiculo : Entity
    public Vin? Vin { get; private set; } //Número de serie
    public Moneda? Precio { get; private set; }
    public Moneda? Mantenimiento { get; private set; }
-   public DateTime? FechaUltimoAlquiler { get; private set; }
+   public DateTime? FechaUltimoAlquiler { get; internal set; }
    public List<Accesorio> Accesorios { get; private set; } = new();
 
 }

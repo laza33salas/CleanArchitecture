@@ -80,4 +80,15 @@ public sealed class Alquiler : Entity
         vehiculo.FechaUltimoAlquiler = fechaCreacion;
         return alquiler;
     }
+
+
+    public Result Confirmar(DateTime utcNow)
+    {
+        if (Status != AlquilerStatus.Reservado)
+        {
+            //Se dispare una excepcion
+        }
+
+        return Result.Success();
+    }
 }

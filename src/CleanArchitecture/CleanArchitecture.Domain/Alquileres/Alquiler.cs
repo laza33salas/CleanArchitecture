@@ -86,7 +86,7 @@ public sealed class Alquiler : Entity
     {
         if (Status != AlquilerStatus.Reservado)
         {
-            //Se dispare una excepcion
+            return Result.Failure(AlquilerErrors.NotReserved);
         }
 
         return Result.Success();

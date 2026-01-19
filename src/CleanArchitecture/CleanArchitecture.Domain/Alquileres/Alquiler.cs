@@ -89,6 +89,25 @@ public sealed class Alquiler : Entity
             return Result.Failure(AlquilerErrors.NotReserved);
         }
 
+        Status = AlquilerStatus.Confirmado;
+        FechaConfirmacion = utcNow;
+
+        RaiseDomainEvent(new AlquilerConfirmadoDomainEvent(Id));
+        return Result.Success();
+    }
+
+
+    public Result Rechazar(DateTime utcNow)
+    {
+        if (Status != AlquilerStatus.Reservado)
+        {
+            return Result.Failure(AlquilerErrors.NotReserved);
+        }
+
+        Status = AlquilerStatus.Rechazado;
+        FechaDenegacion = utcNow;
+        RaiseDomainEvent(new AlquilerRechazadoDomainEvent(Id));
+
         return Result.Success();
     }
 }

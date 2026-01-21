@@ -9,10 +9,6 @@ public sealed record Rating
 
     public int Value { get; init; }
 
-    // private Rating(int value) 
-    // {
-    //     Value = value;
-    // }
     private Rating(int value) => Value = value;
 
     public static Result<Rating> Create(int value)

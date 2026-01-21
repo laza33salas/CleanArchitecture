@@ -1,10 +1,9 @@
-using System.Reflection.Metadata.Ecma335;
-using CleanArchitecture.Domain.Abstractions;
-using CleanArchitecture.Domain.Alquileres;
-using CleanArchitecture.Domain.Reviews.Events;
-using CleanArchitecture.Domain.Vehiculos;
+using CleaArchitecture.Domain.Abstractions;
+using CleaArchitecture.Domain.Alquileres;
+using CleaArchitecture.Domain.Reviews.Events;
 
-namespace CleanArchitecture.Domain.Reviews;
+namespace CleaArchitecture.Domain.Reviews;
+
 
 public sealed class Review : Entity
 {
@@ -15,9 +14,9 @@ public sealed class Review : Entity
         Guid alquilerId,
         Guid userId,
         Rating rating,
-        Review comentario,
-        DateTime fechaCreacion
-        ) : base(id)
+        Comentario comentario,
+        DateTime? fechaCreacion
+    ) : base(id)
     {
         VehiculoId = vehiculoId;
         AlquilerId = alquilerId;
@@ -26,23 +25,26 @@ public sealed class Review : Entity
         Comentario = comentario;
         FechaCreacion = fechaCreacion;
     }
+    
+    public Guid VehiculoId {get; private set;}
+    public Guid AlquilerId {get;private set;}
+    public Guid UserId {get;private set;}
 
-    public Guid VehiculoId { get; private set; }
-    public Guid UserId { get; private set; }
-    public Guid AlquilerId { get; private set; }
-    public Rating Rating { get; private set; }
-    public Review Comentario { get; private set; }
-    public DateTime FechaCreacion { get; private set; }
+    public Rating Rating {get; private set;}
+
+    public Comentario Comentario {get; private set;}   
+
+    public DateTime? FechaCreacion {get; private set;}   
 
 
     public static Result<Review> Create(
-       Alquiler alquiler,
-       Rating rating,
-       Review comentario,
-       DateTime fechaCreacion
-        )
+        Alquiler alquiler,
+        Rating rating,
+        Comentario comentario,
+        DateTime fechaCreacion
+    )
     {
-        if (alquiler.Status != AlquilerStatus.Completado)
+        if(alquiler.Status != AlquilerStatus.Completado)
         {
             return Result.Failure<Review>(ReviewErrors.NotEligible);
         }
@@ -55,11 +57,12 @@ public sealed class Review : Entity
             rating,
             comentario,
             fechaCreacion
-            );
-
+        );
 
         review.RaiseDomainEvent(new ReviewCreatedDomainEvent(review.Id));
+
         return review;
     }
+
 
 }

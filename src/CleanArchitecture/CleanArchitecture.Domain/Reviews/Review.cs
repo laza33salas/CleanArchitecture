@@ -1,9 +1,9 @@
-using CleaArchitecture.Domain.Abstractions;
-using CleaArchitecture.Domain.Alquileres;
-using CleaArchitecture.Domain.Reviews.Events;
+using CleanArchitecture.Domain.Abstractions;
+using CleanArchitecture.Domain.Alquileres;
+using CleanArchitecture.Domain.Reviews.Events;
+using CleanArchitecture.Domain.Vehiculos;
 
-namespace CleaArchitecture.Domain.Reviews;
-
+namespace CleanArchitecture.Domain.Reviews;
 
 public sealed class Review : Entity
 {
@@ -25,16 +25,16 @@ public sealed class Review : Entity
         Comentario = comentario;
         FechaCreacion = fechaCreacion;
     }
-    
-    public Guid VehiculoId {get; private set;}
-    public Guid AlquilerId {get;private set;}
-    public Guid UserId {get;private set;}
 
-    public Rating Rating {get; private set;}
+    public Guid VehiculoId { get; private set; }
+    public Guid AlquilerId { get; private set; }
+    public Guid UserId { get; private set; }
 
-    public Comentario Comentario {get; private set;}   
+    public Rating Rating { get; private set; }
 
-    public DateTime? FechaCreacion {get; private set;}   
+    public Comentario Comentario { get; private set; }
+
+    public DateTime? FechaCreacion { get; private set; }
 
 
     public static Result<Review> Create(
@@ -44,7 +44,7 @@ public sealed class Review : Entity
         DateTime fechaCreacion
     )
     {
-        if(alquiler.Status != AlquilerStatus.Completado)
+        if (alquiler.Status != AlquilerStatus.Completado)
         {
             return Result.Failure<Review>(ReviewErrors.NotEligible);
         }

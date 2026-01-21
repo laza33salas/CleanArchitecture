@@ -1,6 +1,6 @@
-using CleaArchitecture.Domain.Abstractions;
+using CleanArchitecture.Domain.Abstractions;
 
-namespace CleaArchitecture.Domain.Reviews;
+namespace CleanArchitecture.Domain.Reviews;
 
 public static class ReviewErrors
 {

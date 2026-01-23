@@ -1,3 +1,4 @@
+using CleanArchitecture.Domain.Alquileres;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CleanArchitecture.Application;
@@ -12,6 +13,8 @@ public static class DependencyInjection
             configuration.RegisterServicesFromAssemblies(typeof(DependencyInjection).Assembly);
         });
 
+
+        services.AddTransient<PrecioService>();
 
         return services;
     }

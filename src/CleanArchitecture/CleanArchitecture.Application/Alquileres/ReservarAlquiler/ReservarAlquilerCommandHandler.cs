@@ -65,7 +65,7 @@ internal sealed class ReservarAlquilerCommandHandler
             vehiculo,
             user.Id,
             duracion,
-            DateTime.UtcNow,
+            _dateTimeProvider.currentTime,
             _precioService);
 
         _alquilerRepository.Add(alquiler);

@@ -1,3 +1,4 @@
+using CleanArchitecture.Application.Abstractions.Email;
 using CleanArchitecture.Domain.Alquileres;
 using CleanArchitecture.Domain.Alquileres.Events;
 using CleanArchitecture.Domain.Users;
@@ -23,10 +24,26 @@ internal sealed class ReservarAlquilerDomainEventHandler
         this.emailService = emailService;
     }
 
-    public Task Handle(
+    public async Task Handle(
         AlquilerReservadoDomainEvent notification,
         CancellationToken cancellationToken)
     {
-        throw new NotImplementedException();
+        var alquiler = await _alquilerRepository.GetByIdAsync(
+            notification.AlquilerId,
+            cancellationToken);
+
+        if (alquiler is null)
+        {
+            return;
+        }
+
+        var user = await _userRepository.GetByidAsync(
+            alquiler.UserId,
+            cancellationToken);
+
+        if (user is null)
+        {
+            return;
+        }
     }
 }

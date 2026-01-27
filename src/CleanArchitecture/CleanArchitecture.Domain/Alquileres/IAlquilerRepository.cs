@@ -4,7 +4,7 @@ namespace CleanArchitecture.Domain.Alquileres;
 
 public interface IAlquilerRepository
 {
-    Task<Alquiler?> GetByIdAsinc(Guid id, CancellationToken cancellationToken = default);
+    Task<Alquiler?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default);
 
     Task<bool> IsOverlappingAsync(
         Vehiculo vehiculoId,

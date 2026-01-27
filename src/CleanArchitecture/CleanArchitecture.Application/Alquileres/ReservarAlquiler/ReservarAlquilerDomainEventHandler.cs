@@ -45,5 +45,12 @@ internal sealed class ReservarAlquilerDomainEventHandler
         {
             return;
         }
+
+
+        await emailService.SendAsync(
+            user.Email!,
+            "Alquiler Reservado",
+            "Tienes que confirmar esta reserva de lo contraria se va a perder"
+            );
     }
 }
